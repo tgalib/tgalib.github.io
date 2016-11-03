@@ -1,0 +1,91 @@
+<html><head><link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+<link rel="import" href="../bower_components/paper-styles/default-theme.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+
+<link href="https://fonts.googleapis.com/css?family=Khula:300,400,700|Lora:700&amp;subset=latin-ext" rel="stylesheet">
+
+
+
+</head><body><dom-module id="toha-shared-styles">
+  <template>
+    <style>
+
+    /*
+    :root defines styling variables at the document level (the highest level).
+    */
+
+      :root {
+         --toha-header-logo-text-color: white;
+         --toha-header-background-color: #171D2F;
+         --toha-darker-background-color: #0F1320;
+         --toha-light-text-color: #E5E7EE;
+         --toha-secondary-color: #C4AF5F;
+         --toha-header-text-color: white;
+         --toha-body-font: 'Khula', sans-serif;
+         --toha-normal-font: 300;
+         --toha-bold-font: 700;
+
+         --toha-header-font: {
+           font-family: 'Lora', serif;
+           font-weight:  var(--toha-bold-font);
+         };
+         --toha-lightBody-type: {
+           font-family: var(--toha-body-font);
+           font-weight: var(--toha-normal-font);
+           color: #171D2F;
+         };
+         --toha-darkBody-type: {
+           font-family: var(--toha-body-font);
+           font-weight: var(--toha-normal-font);
+           color: #E5E7EE;
+         };
+      }
+
+      /*
+      :host defines properties for the parent element.
+      */
+
+      :host {
+        font-family: var(--toha-body-font);
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      a:link {
+
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      a:visited {
+        color: inherit;
+      }
+      h2 {
+        @apply(--toha-header-font);
+        color: var(--toha-header-background-color);
+        font-size: 2em;
+      }
+      h4 {
+        @apply(--toha-header-font);
+        font-size: 1.5em;
+        margin: 1rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(34, 39, 55, 0.21);
+      }
+      .h4Light {
+        border-bottom: 1px solid rgba(229, 231, 238, 0.21);
+      }
+      .paper-link {
+        font-weight: 400;
+        cursor: pointer;
+      }
+      .paper-link:hover {
+        text-decoration: underline;
+      }
+
+    </style>
+  </template>
+</dom-module>
+</body></html>

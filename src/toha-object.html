@@ -1,0 +1,249 @@
+<html><head><link rel="import" href="../bower_components/iron-meta/iron-meta.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import" href="toha-asset-data.html">
+<link rel="import" href="toha-asset-description.html">
+<link rel="import" href="toha-icons.html">
+<link rel="import" href="toha-related-asset.html">
+<link rel="import" href="toha-shared-styles.html">
+
+</head><body><dom-module id="toha-object">
+
+  <style include="iron-flex"></style>
+  <style is="custom-style" include="toha-shared-styles"></style>
+
+  <style>
+
+    :host {
+      --toolbar-desktop-height: 5rem;
+      --toolbar-mobile-height: 4rem;
+    }
+
+    paper-icon-button {
+      --paper-icon-button-ink-color: inherit;
+    }
+
+    .boundingContainer {
+      max-width: 77.5em;
+      margin: 0 auto;
+      padding: 0 2em;
+    }
+    .layoutSwitcher {
+      @apply(--layout-horizontal);
+    }
+    .layoutSwitcherR {
+      @apply(--layout-vertical);
+    }
+    .iconContainer {
+      @apply(--layout-horizontal);
+      @apply(--layout-justified);
+      width: 8rem;
+      margin-top: 1rem;
+    }
+    .media-icon {
+      --paper-icon-button: {
+        width: 2rem;
+        height: 2rem;
+        padding: 0 0.5rem;
+      };
+    }
+    .iconItem {
+      text-align: center;
+    }
+
+    #assetSummary {
+      background-color: var(--toha-header-background-color);
+      @apply(--toha-darkBody-type);
+    }
+    #heroIcons {
+      @apply(--layout-end-justified);
+      min-width: 12.5rem;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    #heroIcons > .iconItem {
+      padding-left: 1rem;
+    }
+    #assetReuse {
+      background-color: var(--toha-darker-background-color);
+      @apply(--toha-darkBody-type);
+    }
+    #assetDescription {
+      @apply(--toha-lightBody-type);
+    }
+    #assetImageLarge {
+      width: 800px;
+      height: 500px;
+    }
+    #titleContainer {
+      margin-top: 1rem;
+    }
+    #titleIcon {
+      width: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    #assetType {
+      margin-top: 0.2rem;
+      text-transform: uppercase;
+      font-weight: 400;
+      opacity: 0.56;
+    }
+    #assetTitle {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    #assetsRelated {
+       margin-top: 50px;
+    }
+    #assetHeader{
+      border-bottom: 3px solid var(--toha-secondary-color);
+    }
+    #assetDetail {
+      margin-top: 1em;
+    }
+    toha-related-asset {
+      @apply(--layout-flex);
+    }
+
+    @media (max-width: 720px) {
+      .layoutSwitcher {
+        @apply(--layout-vertical);
+      }
+      .layoutSwitcherR {
+        @apply(--layout-horizontal);
+      }
+      .iconContainer {
+        margin: 0;
+      }
+      .iconItem {
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .iconItem > p {
+        margin: 0;
+        padding-top: 0.3rem;
+        padding-right: 1rem;
+      }
+
+      #heroIcons {
+        @apply(--layout-start-justified);
+        font-weight: 400;
+        width: 50%;
+        margin: 0;
+      }
+      #heroIcons > .iconItem {
+        @apply(--layout-horizontal);
+        min-width: 10rem;
+        padding: 0;
+      }
+      #heroIcons p {
+        padding: 0.25rem 0.5rem 0 0.5rem;
+      }
+    }
+
+  </style>
+
+  <template>
+    <iron-media-query on-query-matches-changed="changeTheme" query="(max-width: 720px)" query-matches="{{smallScreen}}">
+    </iron-media-query>
+
+    <iron-ajax id="metadata" auto="" verbose="true" url="[[urlBase]][[uuid]]/metadata/description.json" content-type="application/json" handle-as="json" last-response="{{jsonld}}" on-error="_handleErrorResponse">
+    </iron-ajax>
+
+
+    
+    <div class="horizontal end-justified layout">
+       <iron-image id="assetImageLarge" sizing="cover" class="flex" src="[[asset.urlBase]][[asset.imageUrl]]">
+       </iron-image>
+    </div>
+
+        
+        <div id="assetSummary">
+          <div class="boundingContainer layoutSwitcher">
+            <div>
+              <p>[[asset.creator]]</p>
+              <p>Source: [[asset.source]]</p>
+              <p>[[asset.creditStatement]]</p>
+            </div>
+            <div id="heroIcons" class="horizontal layout">
+              <div class="iconItem">
+                <paper-icon-button toggles="" on-click="toggle" icon="toha-icons:gavel"></paper-icon-button>
+                <p on-click="toggle" class="paper-link">Reuse Image</p>
+              </div>
+              <div class="iconItem">
+                <paper-icon-button icon="toha-icons:expand"></paper-icon-button>
+                <p class="paper-link">Full Screen</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <iron-collapse id="assetReuse" class="horizontal layout">
+          <div class="content layout vertical boundingContainer">
+            <h4 class="h4Light">Reuse this image</h4>
+            <p>Can I reuse this image without permission? <span>[[asset.imageReuse]]</span></p><p>
+            </p><p>[[asset.imageCopyright]]</p>
+            <paper-icon-button toggles="" icon="menu"></paper-icon-button>
+            <template is="dom-repeat" items="[[asset.webpageUsageNotes]]">
+              <p>[[item]]</p>
+            </template>
+          </div>
+        </iron-collapse>
+
+        
+        <div id="assetDescription" class="vertical layout boundingContainer">
+          <div id="assetHeader" class="layoutSwitcher">
+            <div id="titleContainer" class="vertical layout">
+              <div id="typeContainer" class="horizontal layout">
+                <iron-icon id="titleIcon" icon="toha-icons:images"></iron-icon>
+                <div id="assetType">Photograph</div>
+              </div>
+              <h2 id="assetTitle">[[asset.about]]</h2>
+            </div>
+            <span class="flex"></span>
+            <div class="iconContainer horizontal layout">
+              <div class="iconItem layoutSwitcherR">
+                <paper-icon-button class="media-icon" toggles="" icon="toha-icons:images"></paper-icon-button>
+                <p>1</p>
+              </div>
+              <div class="iconItem layoutSwitcherR">
+                <paper-icon-button class="media-icon" toggles="" icon="toha-icons:video"></paper-icon-button>
+                <p>0</p>
+              </div>
+              <div class="iconItem layoutSwitcherR">
+                <paper-icon-button class="media-icon" toggles="" icon="toha-icons:audio"></paper-icon-button>
+                <p>0</p>
+              </div>
+            </div>
+          </div>
+          <div id="assetDetail">
+            <p>Item: [[asset.uuid]]</p>
+            <p>[[asset.summary]]</p>
+          </div>
+        </div>
+
+        
+        <toha-asset-description jsonld="[[asset]]" class="boundingContainer"></toha-asset-description>
+
+        <div id="assetsRelated" class="layout horizontal wrap boundingContainer">
+          <template is="dom-repeat" items="[[asset.related]]">
+            <toha-related-asset type="[[item.type]]" uuid="[[item.uuid]]">
+              <div name="">[[item.name]]</div>
+              <div hidden$="[[!item.description]]" description="">[[item.description]]</div>
+            
+          </toha-related-asset></template>
+        </div>
+
+  </template>
+  <script>Polymer({is:"toha-object",behaviors:[TohaAsset],toggle:function(){this.$.assetReuse.toggle()},changeTheme:function(){this.updateStyles()},_handleErrorResponse:function(e){console.log("ERROR: Ajax Request Failed - FIXME")}});</script>
+</dom-module>
+</body></html>

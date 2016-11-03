@@ -1,0 +1,144 @@
+<html><head><script>
+
+  (function() {
+  //  let config = { jsonld: null, asset: null };
+
+    TohaAsset = {
+
+      properties: {
+        uuid: String,
+
+        urlBase: {
+          type: String,
+          value: function() {
+              return new Polymer.IronMetaQuery({type: 'url', key: 'collection'}).value;
+          }
+        },
+
+        jsonld: {
+          type: Object,
+          readOnly: false,
+          reflectToAttribute: false,
+          notify: false
+        },
+
+        asset: {
+          type: Object,
+          reflectToAttribute: false,
+          notify: false,
+          computed: 'buildAssetData(jsonld)'
+        },
+      },
+
+      buildAssetData: function() {
+
+        var config = { jsonld: null, asset: null };
+        var graph = this.jsonld['@graph'];
+
+        if ((undefined === graph) && (this.jsonld)) return this.jsonld;
+        if (undefined === graph) return undefined;
+
+        config.jsonld = graph[0];
+
+        var get = function(attr, def, join) {
+            if (typeof attr === 'undefined' || attr === null )
+               return def;
+            return join ? def + ', ' + join + ' ' + attr : attr;
+        };
+
+        const URNPREFIX = 9;
+        const ITEMSEPERATOR = ', ';
+
+        const webpage = config.jsonld;
+        const entity = webpage.mainEntity;
+        const entitytype = entity['@type'];
+        /* Setup defaults */
+        const media = (function(){
+           /* TODO: find the associated media that maps to the mainEntity */
+           return entity.associatedMedia[0]
+        })();
+
+        const metadata = (function(){
+           /* TODO: Map to associatedMedia.@type.Metadata */
+           return entity.associatedMedia[1];
+        })();
+
+        const licence = (function(){
+          /* Use the license from the associated media  as default */
+          var el = entity['licence'];
+          var wpl = webpage['licence'];
+          var ml = media['licence'];
+          var mdl = metadata['licence'];
+
+          if (!el) el = Object.assign({},ml);
+          el.media = ml;
+          el.webpage = wpl;
+          el.metadata = mdl;
+
+          return el;
+        })();
+
+        const example =(function (){
+           return entity.workExample[0];
+         })();
+
+        var properties = [
+          {name: 'Collection Names', value: entity.isPartOf.name},
+          {name: 'Collection Areas', value: entity.isPartOf.subjectArea.join(ITEMSEPERATOR) },
+          {name: 'Photographer(s)', value: entity.creator.filter(c => c.jobTitle == 'Photographer').map(c => c.name).join(ITEMSEPERATOR)},
+          {name: 'Date Produced', value: entity.dateCreated },
+          {name: 'Locality', value: entity.contentLocation.name },
+          {name: 'Cultural Groups', value: entity.culturalGroups.join(ITEMSEPERATOR) },
+          {name: 'Object/Medium', value: entity.medium },
+          {name: 'Categories', value: entity.categories.join(ITEMSEPERATOR)},
+          {name: 'Discipline', value: entity.isPartOf.discipline },
+          {name: 'Type of Item', value: entitytype },
+          {name: 'Dimensions', value: entity.dimensions },
+          {name: 'Keywords', value: entity.keywords.join(ITEMSEPERATOR) }
+        ];
+
+        /* Map the JSON-LD data model into the page Data-Model */
+        config.asset = Object.freeze({
+
+          uuid: entity['@id'].slice(URNPREFIX),
+          type: entity['@type'],
+          about: entity.name,
+          summary: entity.description,
+          description: entity.text,
+          urlBase: this.urlBase + entity['@id'].slice(URNPREFIX) + '/data/',
+          imageUrl: media.large.contentUrl,
+          creator: entity.creator.reduce((s,c) => s += `, ${c.jobTitle}: ${c.name}`, '').slice(2),
+          physical: example.description,
+          source: entity.sourceOrganization.reduce((s,o) => s += `, ${o.name}`, '').slice(2),
+
+          displayed: example['displayed'] == true,
+          storedLocation: get(example['storedLocation'],'Currently in storage', 'located in', false),
+          creditStatement: (function(rights,credit){
+              var stmt = rights;
+              return stmt += (stmt && credit ? `, ${credit}` : credit );
+            })(licence['description'], licence['credit']),
+
+          imageReuse: (licence.media['reuse'] == true ? 'Yes' : 'No'),
+          imageCopyright: licence.media.name,
+          webpageUsageNotes: licence.webpage.disambiguatingDescription,
+          information: properties,
+          partOfCollection: `${entity.isPartOf.publisher.name} ${entity.isPartOf.name}`,
+          permalink: webpage.url,
+          accessed: new Date().toDateString(),
+          textCopyright: licence.metadata.description,
+          textReuse: licence.metadata.disambiguatingDescription,
+          textLicenceIcons: licence.metadata.icons,
+          textAuthors: metadata.creator,
+
+          related: webpage.associatedMedia.map(x => ({type: x['@type'], uuid: x['@id'].slice(URNPREFIX), name: x.name, description: x.description }))
+
+        });
+
+        this.jsonld = config.asset;
+        return config.asset;
+      }
+
+    }
+  })();
+</script>
+</head><body></body></html>

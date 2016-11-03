@@ -1,0 +1,66 @@
+<html><head><link rel="import" href="../bower_components/iron-meta/iron-meta.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="toha-shared-styles.html">
+
+
+
+</head><body><dom-module id="toha-author">
+  <template>
+    <style include="toha-shared-styles"></style>
+    <style>
+      :host {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+        @apply(--paper-font-subhead);
+
+        @apply(--toha-author);
+        --profile-size: var(--toha-author-profile-size, 50px);
+      }
+
+      .author-profile {
+        @apply(--layout-horizontal);
+        @apply(--layout-flex);
+      }
+
+      .author-profile iron-image {
+        border-radius: 50%;
+        margin-right: 10px;
+        width: var(--profile-size);
+        height: var(--profile-size);
+        @apply(--toha-author-profile-image);
+      }
+
+      .author {
+        @apply(--layout-vertical);
+        @apply(--layout-left);
+        color: var(--paper-grey-600);
+        @apply(--toha-lightBody-type);
+        @apply(--toha-author-profile-name);
+        font-weight: 600;
+      }
+      .author ::content [title],
+      .author ::content [organization] {
+         @apply(--toha-lightBody-type);
+         font-size: 1em;
+      }
+      .author ::content [organization] {
+        opacity: 0.56;
+        line-height: 1em;
+      }
+
+    </style>
+
+    <div id="authorProfile" class="author-profile">
+        <iron-image src="[[urlBase]]{{profile}}" sizing="contain"></iron-image>
+        <div class="author">
+           <content></content>
+        </div>
+    </div>
+
+  </template>
+
+  <script>Polymer({is:"toha-author",properties:{urlBase:{type:String,value:function(){return new Polymer.IronMetaQuery({type:"url",key:"images"}).value}},profile:String}});</script>
+</dom-module>
+</body></html>

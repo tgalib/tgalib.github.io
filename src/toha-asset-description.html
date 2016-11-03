@@ -1,0 +1,140 @@
+<html><head><link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/marked-element/marked-element.html">
+
+<link rel="import" href="toha-asset-data.html">
+<link rel="import" href="toha-shared-styles.html">
+<link rel="import" href="toha-author.html">
+<link rel="import" href="toha-icons.html">
+
+
+
+</head><body><dom-module id="toha-asset-description">
+  <template>
+    <style include="toha-shared-styles"></style>
+    <style>
+      :host {
+        @apply(--layout-horizontal);
+        @apply(--paper-font-subhead);
+        @apply(--toha-asset-description);
+        @apply(--toha-lightBody-type);
+      }
+
+      :host, .item, .icons {
+        @apply(--layout-horizontal);
+      }
+      #assetDescription {
+        @apply(--layout-vertical);
+        margin-right: 1em;
+      }
+      #assetMisc {
+        @apply(--layout-vertical);
+      }
+      #assetMisc, span.value {
+        @apply(--layout-flex);
+      }
+
+      /* Portrait and Landscape */
+      @media only screen
+        and (max-width: 667px) {
+
+        :host {
+          @apply(--layout-vertical);
+          display: inline-block;
+        }
+      }
+
+      /* Portrait */
+      @media only screen
+        and (max-width: 667px)
+        and (orientation: portrait) {
+
+        .item {
+          @apply(--layout-vertical);
+        }
+        .item span:first-of-type {
+          font-weight: var(--toha-bold-font);
+          opacity: 0.5
+        }
+      }
+
+      #assetMisc {
+        min-width: 20em;
+      }
+      .item {
+        margin-right: 1.5em;
+        margin-bottom: 0.5em;
+        @apply(--toha-asset-description-layout);
+      }
+      span.name {
+        width: 150px;
+      }
+
+      toha-author {
+        margin-bottom: 1em;
+      }
+
+      .markdown-html p {
+        margin: 0em 1.5em 0em 0em;
+      }
+    </style>
+
+    <div id="assetDescription" class="asset-description">
+       <h4>Summary</h4>
+       <marked-element markdown="[[asset.description]]">
+         <div class="markdown-html"></div>
+       </marked-element>
+       <h4>Physical Description</h4>
+       <div>[[asset.physical]]</div>
+       <h4>More Information</h4>
+       <template is="dom-repeat" items="[[asset.information]]">
+          <div class="item"><span class="name">[[item.name]]:</span><span class="value">[[item.value]]</span></div>
+       </template>
+    </div>
+    <div id="assetMisc">
+       <div hidden$="[[asset.displayed]]">
+          <h4>Display Status</h4>
+          <div>[[asset.storedLocation]]</div>
+       </div>
+       <div hidden$="[[!asset.displayed]]">
+         <h4>Display Status</h4>
+         <div>On display</div>
+       </div>
+
+       <h4>Share</h4>
+       <div class="icons">
+         <paper-icon-button toggles="" icon="toha-icons:twitter"></paper-icon-button>
+         <paper-icon-button toggles="" icon="toha-icons:facebook"></paper-icon-button>
+       </div>
+
+       <h4>Cite this page</h4>
+       <div>[[asset.partOfCollection]]</div>
+       <div><a href="[[asset.permalink]]">[[asset.permalink]]</a></div>
+       <div>Accessed [[asset.accessed]]</div>
+       <h4>Rights</h4>
+       <div>[[asset.textReuse]]</div>
+
+       <div class="icons">
+         <template is="dom-repeat" items="[[asset.textLicenceIcons]]">
+            <paper-icon-button toggles="" icon="[[item]]"></paper-icon-button>
+         </template>
+       </div>
+
+       <div>[[asset.textCopyright]]</div>
+
+       <h4>Authors</h4>
+       <template is="dom-repeat" items="[[asset.textAuthors]]">
+         <toha-author profile="[[item.image]]">
+           [[item.name]]
+           <span hidden$="[[!item.jobTitle]]" title="">[[item.jobTitle]]</span>
+           <span hidden$="[[!item.organization]]" organization="">[[item.organization.name]]</span>
+         </toha-author>
+       </template>
+
+    </div>
+  </template>
+
+  <script>Polymer({is:"toha-asset-description",behaviors:[TohaAsset]});</script>
+</dom-module>
+</body></html>

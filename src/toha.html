@@ -1,0 +1,152 @@
+<html><head><link rel="import" href="../bower_components/iron-meta/iron-meta.html">
+<link rel="import" href="../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="toha-shared-styles.html">
+<link rel="import" href="toha-toolbar.html">
+<link rel="import" href="toha-toolbar-links.html">
+<link rel="import" href="toha-object.html">
+
+</head><body><dom-module id="toha-app">
+
+  <style include="iron-flex"></style>
+  <style is="custom-style" include="toha-shared-styles"></style>
+
+  <style>
+    :host {
+      --toolbar-desktop-height: 5rem;
+      --toolbar-mobile-height: 4rem;
+    }
+
+    app-drawer {
+      color: var(--toha-light-text-color);
+      --app-drawer-content-container: {
+        background-color: var(--toha-header-background-color);
+      };
+    }
+
+    paper-button {
+      font-family: inherit;
+    }
+
+    paper-icon-button {
+      --paper-icon-button-ink-color: inherit;
+    }
+
+    toha-toolbar {
+      --toolbar-height: var(--toolbar-desktop-height);
+      --toolbar-color: var(--toha-header-background-color);
+      --toolbar-title-style: {
+          @apply(--toha-header-font);
+          font-size: 2rem;
+          margin-top: 0.2rem;
+      };
+      --toolbar-subtitle-style: {
+          @apply(--toha-darkBody-type);
+          opacity: 0.56;
+      };
+    }
+
+    toha-toolbar-links {
+        --toolbar-link-style: {
+          font-family: inherit;
+          height: var(--toolbar-desktop-height);
+        };
+        --paper-item-focused: {
+          background: var(--toha-secondary-color);
+          font-weight: 600;
+          color: white;
+        };
+        --toolbar-link-text: {
+          margin: 0.2em 0 0 0;
+        }
+    }
+
+    #search-button {
+      font-size: 1rem;
+      text-transform: none;
+      border: 1px solid var(--toolbar-text-color);
+      padding: 0.5rem 0.75rem;
+      margin-left: 1rem;
+    }
+    #search-button > iron-icon {
+      margin-right: 0.25rem;
+    }
+    #search-button > p {
+      margin: 0.2em 0 0 0;
+    }
+
+    @media (max-width: 720px) {
+      toha-toolbar {
+        --toolbar-height: var(--toolbar-mobile-height);
+        --toolbar-title-style: {
+          @apply(--toha-header-font);
+          font-size: 2rem;
+        }
+        --toolbar-subtitle-style: {
+          display: none;
+        }
+      }
+
+      toha-toolbar-links {
+        --toolbar-link-style: {
+          font-family: inherit;
+          height: var(--toolbar-mobile-height);
+        }
+      }
+   }
+  </style>
+
+  <template>
+
+    <iron-meta type="url" key="images" value="/"></iron-meta>
+    <iron-meta type="url" key="collection" value="https://tgalib.github.io/ao-"></iron-meta>
+    <iron-meta type="uuid" key="default" value="682b8dc3-1c9b-4752-96f4-97545f91be18"></iron-meta>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="/ark:/1234/:uuid" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+    <iron-media-query on-query-matches-changed="changeTheme" query="(max-width: 720px)" query-matches="{{smallScreen}}">
+    </iron-media-query>
+
+    <app-drawer-layout force-narrow="">
+      <app-drawer align="end">
+        <toha-toolbar-links></toha-toolbar-links>
+      </app-drawer>
+      <app-header-layout>
+        <app-header reveals="">
+          <toha-toolbar title="toha" subtitle="Photography Database of Tauranga">
+            <template is="dom-if" if="{{!smallScreen}}">
+              <toha-toolbar-links class="horizontal layout"></toha-toolbar-links>
+              <paper-button id="search-button"><iron-icon icon="search"></iron-icon><p>Search</p></paper-button>
+            </template>
+
+            
+            <template is="dom-if" if="{{smallScreen}}">
+              <paper-icon-button icon="menu" drawer-toggle=""></paper-icon-button>
+              <paper-icon-button icon="search"></paper-icon-button>
+            </template>
+          </toha-toolbar>
+        </app-header>
+
+        <iron-pages id="collectionpages" selected="[[uuid]]" attr-for-selected="uuid" role="main">
+
+        </iron-pages>
+
+      </app-header-layout>
+    </app-drawer-layout>
+
+    
+    
+
+  </template>
+  <script>Polymer({is:"toha-app",changeTheme:function(){this.updateStyles()},properties:{uuid:{type:String,reflectToAttribute:!0,observer:"_uuidChanged"}},observers:["_routeChanged(routeData.uuid)"],_routeChanged:function(e){this.uuid=e||new Polymer.IronMetaQuery({type:"uuid",key:"default"}).value},_uuidChanged:function(e){if(!this.$$("toha-object[uuid='"+this.uuid+"']")){var t=this.create("toha-object");t.setAttribute("uuid",this.uuid),Polymer.dom(this.$.collectionpages).appendChild(t)}}});</script>
+</dom-module>
+</body></html>

@@ -1,0 +1,132 @@
+<html><head><link rel="import" href="../bower_components/iron-meta/iron-meta.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="toha-shared-styles.html">
+<link rel="import" href="toha-icons.html">
+
+
+</head><body><dom-module id="toha-related-asset">
+  <template>
+
+    <style include="toha-shared-styles"></style>
+    <style>
+      :host {
+        @apply(--layout-horizontal);
+        @apply(--paper-font-subhead);
+        @apply(--toha-related-asset);
+      }
+
+      paper-card {
+          border-radius: 0;
+      }
+
+      .asset-related {
+        min-width: 12em;
+        margin: 5px;
+        width: 100%;
+        --paper-card {
+          white-space: normal;
+          @apply(--layout-vertical);
+          text-overflow: ellipsis;
+          overflow-x: hidden;
+        };
+
+        --paper-card-content: {
+          margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+          height: 8rem;
+          opacity: 0.9;
+          @apply(--paper-font-caption);
+          @apply(--toha-lightBody-type);
+          color: var(--paper-grey-600);
+          padding: 0;
+        };
+
+      }
+
+      .card-action paper-button {
+         --paper-button: {
+           opacity: 0.9;
+           @apply(--paper-font-caption);
+           @apply(--toha-lightBody-type);
+           color: var(--paper-grey-600);
+           padding: 0;
+         };
+      }
+
+      .card-action a:hover paper-button {
+         --paper-button: {
+           font-style: normal;
+           font-weight: var(--toha-bold-font);
+         }
+      }
+
+
+      ::content div {
+        white-space: normal;
+        font-weight: var(--toha-bold-font);
+      }
+
+      ::content div[description] {
+        font-weight: var(--toha-normal-font);
+      }
+
+      .asset-type {
+        width: 100%;
+        font-size: 0.75rem;
+        display:inline-block;
+        margin: 0 0 0.5rem 0;
+        padding: 0;
+        border-bottom: 1px solid rgba(34, 39, 55, 0.21);
+        @apply(--toha-lightBody-type);
+      }
+
+      .asset-type iron-icon {
+        padding-right: 3px;
+        --iron-icon-height: 16px;
+        --iron-icon-width: 16px;
+      }
+
+      #photographType iron-icon {
+        --iron-icon-fill-color: rgb(31, 167, 214);
+      }
+
+      #articleType iron-icon {
+        --iron-icon-fill-color: rgb(220, 19, 41);
+      }
+      .asset-type[hidden] {
+        display: none !important;
+      }
+
+      .asset-type > span {
+        text-transform: uppercase;
+        padding-left: 0.5em;
+      }
+
+    </style>
+
+
+    <paper-card id="relatedAsset" class="asset-related" image="[[urlBase]][[uuid]]/data/image/[[uuid]].web.small.jpg">
+      <div class="card-content">
+        <div id="photographType" class="asset-type">
+          <iron-icon icon="toha-icons:images"></iron-icon><span>Photograph</span>
+        </div>
+        <div id="articleType" class="asset-type">
+          <iron-icon icon="subject"></iron-icon><span>Article</span>
+        </div>
+        <content select="div[name]"></content>
+        <content select="div[description]"></content>
+      </div>
+      <div class="card-action">
+        <a href="/ark:/1234/[[uuid]]">
+           <paper-button>VIEW</paper-button>
+        </a>
+        <paper-button>SHARE</paper-button>
+    
+
+  </div></paper-card></template>
+
+  <script>Polymer({is:"toha-related-asset",properties:{uuid:String,urlBase:{type:String,value:function(){return new Polymer.IronMetaQuery({type:"url",key:"collection"}).value}},photograph:String,article:String},ready:function(){var t=this.$$("#articleType");(this.article||"Article"==this.type)&&(t=this.$$("#photographType")),this.toggleAttribute("hidden",!0,t),this.item||(this.item=this.photograph?this.photograph:this.article)}});</script>
+</dom-module>
+</body></html>

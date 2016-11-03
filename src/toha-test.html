@@ -1,0 +1,348 @@
+<html><head><link rel="import" href="toha-object.html">
+
+</head><body><dom-module id="toha-test">
+<template>
+<toha-object jsonld="
+{ &quot;@context&quot;: &quot;http://schema.org&quot;,
+  &quot;@graph&quot;: [{
+  &quot;@type&quot;: &quot;WebPage&quot;,
+  &quot;name&quot;: &quot;Hui at Ngāti Ranginui Wharenui&quot;,
+  &quot;url&quot;: &quot;https://toha.io/ark:/1234/682b8dc3-1c9b-4752-96f4-97545f91be18&quot;,
+
+  &quot;potentialAction&quot;: {
+    &quot;@type&quot;: &quot;ViewAction&quot;,
+    &quot;target&quot;:[
+      &quot;https://toha.io/ark:/1234/682b8dc3-1c9b-4752-96f4-97545f91be18&quot;,
+      {
+        &quot;@type&quot;: &quot;EntryPoint&quot;,
+        &quot;urlTemplate&quot;: &quot;https://toha.io/ark:/1234/682b8dc3-1c9b-4752-96f4-97545f91be18&quot;,
+        &quot;contentType&quot;: &quot;application/json+ld&quot;
+      }
+    ]
+  },
+
+  &quot;relatedLink&quot;: &quot;https://toha.io/collection/giffordcross&quot;,
+  &quot;primaryImageOfPage&quot;: { &quot;contentUrl&quot;: &quot;../collection/images/682b8dc3-1c9b-4752-96f4-97545f91be18.web.large.jpg&quot; },
+  &quot;isFamilyFriendly&quot;: true,
+
+  &quot;accessibilityControl&quot;: [&quot;fullKeyboardControl&quot;,&quot;fullMouseControl&quot;],
+  &quot;accessibilityFeature&quot;: [&quot;largePrint/CSSEnabled&quot;,&quot;highContrast/CSSEnabled&quot;, &quot;resizeText/CSSEnabled&quot;,&quot;displayTransformability&quot;,&quot;longDescription&quot;,&quot;alternativeText&quot;],
+  &quot;accessibilityHazard&quot;: [&quot;noFlashingHazard&quot;,&quot;noMotionSimulationHazard&quot;, &quot;noSoundHazard&quot;],
+
+  &quot;copyrightYear&quot;: &quot;2016&quot;,
+  &quot;copyrightHolder&quot;: [{
+       &quot;@type&quot;: &quot;Organization&quot;,
+       &quot;name&quot;: &quot;Tauranga City Library&quot;
+    },
+    {
+       &quot;@type&quot;: &quot;Person&quot;,
+       &quot;name&quot;: &quot;Steve Holden&quot;
+    }
+  ],
+
+  &quot;licence&quot;:{
+    &quot;@type&quot;: &quot;Licence&quot;,
+    &quot;@id&quot;: &quot;CreativeCommonsAttribution-3-0-NZ&quot;,
+    &quot;name&quot;:&quot;Creative Commons Attribution 3.0 New Zealand licence&quot;,
+    &quot;description&quot;: &quot;Text content on this page is licensed under a Creative Commons Attribution 4.0 New Zealand licence / Copyright Tauranga City Library, &quot;,
+    &quot;disambiguatingDescription&quot;: [&quot;Tauranga City Library does not own the copyright in all the material featured on this website. In some cases copyright belongs to third parties and has been published here under a licence agreement: this does not authorise you to copy that material. You may be required to obtain permission from the copyright owner.&quot;,
+      &quot;Some unpublished material may require permission for reuse even if it is very old. Orphan works, where the copyright owner is unknown,also require permission for reuse. Indigenous works may have additional legal and cultural issues. You may be required to seek cultural clearances from Māori, Pacific Island or other ethnic communities, families, individuals or organisations before you may reproduce any material.&quot;],
+    &quot;url&quot;:&quot;https://creativecommons.org/licenses/by/3.0/nz/&quot;,
+    &quot;reuse&quot;: false,
+    &quot;icons&quot;: [],
+    &quot;NonCommercialOpen&quot;: false,
+    &quot;Open&quot;: false
+  },
+
+  &quot;mainEntity&quot;: {
+    &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:682b8dc3-1c9b-4752-96f4-97545f91be18&quot;,
+    &quot;name&quot;: &quot;Hui at Ngāti Ranginui Wharenui&quot; ,
+    &quot;description&quot;: &quot;Hui at Ngāti Ranginui Wharenui Tamateapowhaiwhenua in Huria.&quot;,
+    &quot;text&quot;: &quot;Ngāti Ranginui Wharenui Tamateapowhaiwhenua in Huria with Hare Pearson (Pihana) speaking at the microphone.  Seated at centre is Turi Te Kani.&quot;,
+    &quot;disambiguatingDescription&quot;: null,
+
+    &quot;dateModified&quot;: &quot;2015-12-01T00:08:00Z&quot;,
+
+    &quot;dateCreated&quot;: &quot;1962-04-14&quot;,
+    &quot;contentLocation&quot;: {
+       &quot;@type&quot;: &quot;Place&quot;,
+       &quot;name&quot;: &quot;Judea, Tauranga, Bay of Plenty, New Zealand&quot;
+    },
+    &quot;keywords&quot;: [
+      &quot;People&quot;,
+      &quot;Ngāti Ranginui&quot;,
+      &quot;Wharenui&quot;,
+      &quot;Huria&quot;,
+      &quot;Tamateapowhaiwhenua&quot;
+    ],
+
+    &quot;medium&quot;: &quot;Negative&quot;,
+    &quot;dimensions&quot;: &quot;102 mm (Length), 127 mm (Width)&quot;,
+
+    &quot;isPartOf&quot;: {
+       &quot;@type&quot;: &quot;Collection&quot;,
+       &quot;name&quot;: &quot;Gifford-Cross Photographic Collection&quot;,
+       &quot;discipline&quot;: &quot;Ethnohistory&quot;,
+       &quot;subjectArea&quot;: [
+         &quot;Bay of Plenty&quot;,
+         &quot;Politics and Society&quot;
+       ],
+       &quot;publisher&quot;: {
+           &quot;@type&quot;: &quot;Organization&quot;,
+           &quot;@id&quot;: &quot;BayOfPlentyTimes&quot;,
+           &quot;name&quot;: &quot;Bay of Plenty Times&quot;
+       }
+    },
+
+    &quot;culturalGroups&quot;: [
+      &quot;Ngāti Ranginui&quot;
+    ],
+    &quot;categories&quot;: [
+      &quot;Māori Collections&quot;
+    ],
+
+    &quot;creator&quot;: [
+      { &quot;@type&quot;: &quot;Person&quot;,
+        &quot;name&quot;:&quot;John Holden&quot;,
+        &quot;jobTitle&quot;: &quot;Photographer&quot;
+      }
+    ],
+    &quot;sourceOrganization&quot;: [
+      { &quot;@type&quot;: &quot;Organization&quot;,
+        &quot;name&quot;: &quot;Bay of Plenty Times&quot;}
+    ],
+
+    &quot;copyrightYear&quot;: &quot;1962&quot;,
+    &quot;copyrightHolder&quot;: [{
+         &quot;@type&quot;: &quot;Organization&quot;,
+         &quot;name&quot;: &quot;Bay of Plenty Times&quot;
+      }
+    ],
+
+    &quot;licence&quot;:{
+      &quot;@type&quot;: &quot;Licence&quot;,
+      &quot;@id&quot;: &quot;AllRightsReserved&quot;,
+      &quot;name&quot;:&quot;All Rights Reserved&quot;,
+      &quot;credit&quot;: &quot;Negative donated by the Gifford and Cross Families&quot;,
+      &quot;description&quot;:&quot;Copyright Bay of Plenty Times / All Rights Reserved&quot;,
+      &quot;url&quot;:&quot;&quot;,
+      &quot;reuse&quot;: false,
+      &quot;icons&quot;: [],
+      &quot;NonCommercialOpen&quot;: false,
+      &quot;Open&quot;: false
+    },
+
+    &quot;workExample&quot;: [
+      { &quot;@type&quot;: &quot;Photograph&quot;,
+        &quot;description&quot;: &quot;Black and white negative 5x4 inch&quot;,
+        &quot;displayed&quot;: false,
+        &quot;storedLocation&quot;: null
+      }
+    ],
+
+    &quot;associatedMedia&quot;: [{
+      &quot;@type&quot;: &quot;ImageObject&quot;,
+      &quot;caption&quot;: &quot;Hui at Ngāti Ranginui Wharenui Tamateapowhaiwhenua in Huria&quot;,
+
+      &quot;copyrightYear&quot;: &quot;1962&quot;,
+      &quot;copyrightHolder&quot;: [{
+          &quot;@type&quot;: &quot;Organization&quot;,
+          &quot;@id&quot;: &quot;TaurangaLibrary&quot;,
+          &quot;name&quot;: &quot;TaurangaLibrary&quot;
+        },
+        {
+          &quot;@type&quot;: &quot;Organization&quot;,
+          &quot;name&quot;: &quot;Bay of Plenty Times&quot;
+        }
+      ],
+
+      &quot;licence&quot;:{
+        &quot;@type&quot;: &quot;Licence&quot;,
+        &quot;@id&quot;: &quot;AllRightsReserved&quot;,
+        &quot;name&quot;:&quot;All Rights Reserved&quot;,
+        &quot;description&quot;: &quot;Copyright Bay of Plenty Times and Tauranga City Library / All Rights Reserved / Reuse  Requires Cultural Clearances&quot;,
+        &quot;url&quot;:&quot;&quot;,
+        &quot;reuse&quot;: false,
+        &quot;icons&quot;: [],
+        &quot;NonCommercialOpen&quot;: false,
+        &quot;Open&quot;: false
+      },
+
+      &quot;large&quot;: {
+        &quot;@type&quot;:&quot;ImageObject&quot;,
+        &quot;contentUrl&quot;:&quot;../collection/images/682b8dc3-1c9b-4752-96f4-97545f91be18.web.large.jpg&quot;,
+        &quot;encodingFormat&quot;: &quot;jpg&quot;,
+        &quot;fileFormat&quot;: &quot;image/jpeg&quot;,
+        &quot;width&quot;:790,
+        &quot;height&quot;:782,
+        &quot;Size&quot;:410000,
+        &quot;SizeCaption&quot;:&quot;410KB&quot;
+      },
+
+      &quot;medium&quot;: {
+        &quot;@type&quot;:&quot;ImageObject&quot;,
+        &quot;contentUrl&quot;:&quot;../collection/images/682b8dc3-1c9b-4752-96f4-97545f91be18.web.large.jpg&quot;,
+        &quot;encodingFormat&quot;: &quot;jpg&quot;,
+        &quot;fileFormat&quot;: &quot;image/jpeg&quot;,
+        &quot;width&quot;:790,
+        &quot;height&quot;:782,
+        &quot;Size&quot;:410000,
+        &quot;SizeCaption&quot;:&quot;410KB&quot;
+      },
+
+      &quot;small&quot;: {
+        &quot;@type&quot;:&quot;ImageObject&quot;,
+        &quot;contentUrl&quot;:&quot;../collection/images/682b8dc3-1c9b-4752-96f4-97545f91be18.web.small.jpg&quot;,
+        &quot;encodingFormat&quot;: &quot;jpg&quot;,
+        &quot;fileFormat&quot;: &quot;image/jpeg&quot;,
+        &quot;width&quot;:270,
+        &quot;height&quot;:190,
+        &quot;Size&quot;:49000,
+        &quot;SizeCaption&quot;:&quot;49KB&quot;
+      },
+
+      &quot;thumbnail&quot;: {
+        &quot;@type&quot;:&quot;ImageObject&quot;,
+        &quot;contentUrl&quot;:&quot;../collection/images/682b8dc3-1c9b-4752-96f4-97545f91be18.web.small.jpg&quot;,
+        &quot;encodingFormat&quot;: &quot;jpg&quot;,
+        &quot;fileFormat&quot;: &quot;image/jpeg&quot;,
+        &quot;width&quot;:270,
+        &quot;height&quot;:190,
+        &quot;Size&quot;:49000,
+        &quot;SizeCaption&quot;:&quot;49KB&quot;
+      },
+      &quot;original&quot; : null,
+      &quot;tiled&quot;: null
+    },
+    {
+      &quot;@type&quot;: &quot;MetadataDocument&quot;,
+
+      &quot;dateCreated&quot; : &quot;2016-07-14T00:08:00Z&quot;,
+      &quot;datePublished&quot; : &quot;2016-07-14T00:08:00Z&quot;,
+      &quot;dateModified&quot;: &quot;2016-07-14T00:08:00Z&quot;,
+
+      &quot;creator&quot;: [
+        { &quot;@type&quot;: &quot;Person&quot;,
+          &quot;name&quot;: &quot;Harley Couper&quot;,
+          &quot;image&quot;: &quot;images/profile1.jpg&quot;,
+          &quot;jobTitle&quot;: &quot;Information Librarian&quot; },
+        { &quot;@type&quot;: &quot;Person&quot;,
+          &quot;name&quot;: &quot;Debbie McCauley&quot;,
+          &quot;image&quot;: &quot;images/profile2.jpg&quot;,
+          &quot;jobTitle&quot;: &quot;Information Librarian&quot;,
+          &quot;organization&quot;: {
+            &quot;@type&quot;: &quot;Organization&quot;,
+            &quot;@id&quot;: &quot;TaurangaLibrary&quot;,
+            &quot;name&quot;: &quot;Tauranga Library&quot; }
+        }
+      ],
+
+      &quot;sourceOrganization&quot;: [
+        { &quot;@type&quot;: &quot;Organization&quot;,
+          &quot;@id&quot;: &quot;TaurangaLibrary&quot;,
+          &quot;name&quot;: &quot;Tauranga Library&quot; }
+      ],
+
+      &quot;copyrightYear&quot;: &quot;2016&quot;,
+      &quot;copyrightHolder&quot;: {
+        &quot;@type&quot;: &quot;Organization&quot;,
+        &quot;@id&quot;: &quot;TaurangaLibrary&quot;,
+        &quot;name&quot;: &quot;TaurangaLibrary&quot;
+      },
+
+      &quot;licence&quot;: {
+        &quot;@type&quot;: &quot;Licence&quot;,
+        &quot;@id&quot;: &quot;CreativeCommonsAttribution-3-0-NZ&quot;,
+        &quot;name&quot;:&quot;Creative Commons Attribution 3.0 New Zealand licence&quot;,
+        &quot;description&quot;: &quot;Metadata text on this page is licensed under a Creative Commons Attribution 3.0 New Zealand licence / Copyright Tauranga City Library. Refer to the image Licence above for Image reuse.&quot;,
+        &quot;disambiguatingDescription&quot;: [&quot;We support the open release of data and information about our collections.&quot;],
+        &quot;url&quot;:&quot;https://creativecommons.org/licenses/by/3.0/nz/&quot;,
+        &quot;reuse&quot;: true,
+        &quot;icons&quot;: [&quot;toha-icons:creative-commons&quot;, &quot;toha-icons:cc-attribution&quot;],
+        &quot;NonCommercialOpen&quot;: true,
+        &quot;Open&quot;: true
+      }
+    }
+  ]
+},
+
+&quot;associatedMedia&quot;: [
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:7e001f3c-09f1-49cf-9c7c-a963e4b96895&quot;,
+    &quot;name&quot;: &quot;Mr P.E. Walsh&quot;,
+    &quot;description&quot;: &quot;Second World War R.A.F. and P.O.W. veteran Mr P.E. Walsh working at his potters wheel.&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:17d3dac0-0fcf-4af7-b4cb-cfb3ca19ae60&quot;,
+    &quot;name&quot;: &quot;Girls at Tuesday sports meet&quot; ,
+    &quot;description&quot;: &quot;Three students on the winners podium with sport field in the background.  Left to right: C. Byers, G. Wilson &amp; L. Whitwell.&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:37e6fe82-3df4-4bb4-a3b6-16ce100e5c19&quot;,
+    &quot;name&quot;: &quot;Rugby game&quot; ,
+    &quot;description&quot;: &quot;Rugby game underway.&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:62b9b9ce-5943-49b8-84c2-d3ea7eae9fed&quot;,
+    &quot;name&quot;: &quot;View from Wharf Street&quot; ,
+    &quot;description&quot;: &quot;From the Feature Page, shows Wharf Streets Bank of New Zealand next to a residential house and the harbour with Matapihi bridge in the background.&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:75edc041-740a-428b-9b84-83068e1153c9&quot;,
+    &quot;name&quot;: &quot;Miss Phil Dumbleton&quot; ,
+    &quot;description&quot;: &quot;Miss Phil Dumbleton and her dog Blue on the estuary.  Part of a photo shoot that included many other images and originally described as lady + dog + boat.  Housed within an Extras Feb 82 box.  An image from the same occasion was published in the Bay of Plenty Times on February 13, 1982 and again on February 21, 2007 as part of a Memories feature.&quot;
+  },
+  { &quot;@type&quot;: &quot;Article&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:76dfb34d-66aa-416e-b07c-011f6a740c86&quot;,
+    &quot;name&quot;: &quot;Tauranga Girls College Sports&quot; ,
+    &quot;description&quot;: &quot;The mascot with L. Leonard, D. OSullivan &amp; B. Leach amidst a crowd of students in sunhats.&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:423be564-9d90-4cda-8b9a-479c55c92aaf&quot;,
+    &quot;name&quot;: &quot;Springbok Rugby Game&quot; ,
+    &quot;description&quot;: &quot;Depicts a barb wired line, heavily policed rugby field in Rotorua, prior to or during the Bay of Plenty vs Springboks game on September 2, 1981.&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:682b8dc3-1c9b-4752-96f4-97545f91be18&quot;,
+    &quot;name&quot;: &quot;Hui at Ngāti Ranginui Wharenui&quot; ,
+    &quot;description&quot;: &quot;Hui at Ngāti Ranginui Wharenui Tamateapowhaiwhenua in Huria&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:832e4dcc-f6cb-4a3f-89e8-a39dd2c9a40f&quot;,
+    &quot;name&quot;: &quot;J.B. Aitkin Shark Catch&quot; ,
+    &quot;description&quot;: &quot;Joan Aitkin standing next to a caught shark and an unidentified man with details on a boards as follows: Joan Aitcken, Date: 19th March, Fish: Thresher, Weight: 648, Launch: Rarangi.&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:6768a300-84be-4156-b52b-67cd8e62e61b&quot;,
+    &quot;name&quot;: &quot;Cherub Class Yachts&quot; ,
+    &quot;description&quot;: &quot;Several young people in yachts racing against the backdrop of the Matapihi rail bridge.&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:28358cac-93cd-42df-99ad-3d73d9f53416&quot;,
+    &quot;name&quot;: &quot;FL H.K. Griffiths meets Mayor&quot; ,
+    &quot;description&quot;: &quot;Flight Lieutenant H.K. Griffiths with Mayor of Tauranga Mr D.S. Mitchell&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:143506e2-4c68-43cf-870c-355c4100d29e&quot;,
+    &quot;name&quot;: &quot;Bogged Logging Truck&quot; ,
+    &quot;description&quot;: &quot;An Andersens Transport truck on the beach getting hitched to a sand bogged second truck loaded with logs.  Behind them is a barge loaded with logs and the Tauranga Harbour.&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:586665b5-538e-4e9c-8e93-35dc4f33618e&quot;,
+    &quot;name&quot;: &quot;Thailand Charge dAffaires&quot; ,
+    &quot;description&quot;: &quot;Thailand Charge dAffaires and his wife with Mayor of Tauranga Mr.D. Mitchell.&quot;
+  },
+  { &quot;@type&quot;: &quot;Photograph&quot;,
+    &quot;@id&quot;: &quot;urn:uuid:19018543-5613-4be2-ae07-1610b2eb8d5e&quot;,
+    &quot;name&quot;: &quot;Tauriko Sports Day&quot; ,
+    &quot;description&quot;: &quot;Two boys having a pillow fight.&quot;
+  }
+] } ] }
+
+">
+</toha-object>
+</template>
+<script>Polymer({is:"toha-test"});</script>
+</dom-module>
+</body></html>

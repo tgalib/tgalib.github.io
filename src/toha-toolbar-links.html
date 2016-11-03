@@ -1,0 +1,33 @@
+<html><head><link rel="import" href="../bower_components/paper-item/paper-item.html">
+
+</head><body><dom-module id="toha-toolbar-links">
+  <template>
+
+    <style>
+
+      a {
+        color: inherit;
+        font-family: inherit;
+        text-decoration: none;
+      }
+
+      paper-item {
+        @apply(--toolbar-link-style);
+      }
+
+      paper-item > p {
+        @apply(--toolbar-link-text);
+      }
+
+    </style>
+
+    <template is="dom-repeat" items="[[links]]" as="link" initial-count="1">
+      <a href="[[link.href]]" tabindex="-1"><paper-item><p>[[link.name]]</p></paper-item></a>
+    </template>
+
+  </template>
+
+  <script>Polymer({is:"toha-toolbar-links",properties:{links:{type:Array,value:function(){return[{name:"Our Collections",href:"/collections"},{name:"Our API",href:"/api"},{name:"About",href:"/about"}]}}}});</script>
+
+</dom-module>
+</body></html>
