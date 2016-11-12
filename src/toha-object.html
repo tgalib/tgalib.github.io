@@ -57,6 +57,9 @@
     .iconItem {
       text-align: center;
     }
+    .iconItem > p {
+      margin-bottom: 0;
+    }
 
     #assetSummary {
       background-color: var(--toha-header-background-color);
@@ -78,9 +81,12 @@
     #assetDescription {
       @apply(--toha-lightBody-type);
     }
-    #assetImageLarge {
-      width: 800px;
+    #imageContainer {
       height: 500px;
+      background: black;
+    }
+    #assetImageLarge {
+      background-color: black;
     }
     #titleContainer {
       margin-top: 1rem;
@@ -112,6 +118,24 @@
     toha-related-asset {
       @apply(--layout-flex);
     }
+    #request-button {
+      display: inline-block;
+      font-family: inherit;
+      font-size: 1rem;
+      text-transform: none;
+      border: 1px solid var(--toolbar-text-color);
+      padding: 0.5rem 0.75rem;
+      margin: 0;
+      @apply(--layout-self-start);
+    }
+    #request-button > iron-icon {
+      margin-right: 0.33em;
+      margin-bottom: 0.2em;
+    }
+    #request-button > p {
+      display: inline-block;
+      margin: 0.2em 0 0 0.2em;
+    }
 
     @media (max-width: 720px) {
       .layoutSwitcher {
@@ -133,6 +157,9 @@
         padding-right: 1rem;
       }
 
+      #imageContainer {
+        height: 320px;
+      }
       #heroIcons {
         @apply(--layout-start-justified);
         font-weight: 400;
@@ -147,6 +174,10 @@
       #heroIcons p {
         padding: 0.25rem 0.5rem 0 0.5rem;
       }
+      #request-button {
+        display: inherit;
+        @apply(--layout-self-stretch);
+      }
     }
 
   </style>
@@ -160,8 +191,8 @@
 
 
     
-    <div class="horizontal end-justified layout">
-       <iron-image id="assetImageLarge" sizing="cover" class="flex" src="[[asset.urlBase]][[asset.imageUrl]]">
+    <div id="imageContainer" class="horizontal end-justified layout">
+       <iron-image id="assetImageLarge" sizing="contain" class="flex" preload="" fade="" src="[[asset.urlBase]][[asset.imageUrl]]">
        </iron-image>
     </div>
 
@@ -173,6 +204,7 @@
               <p>Source: [[asset.source]]</p>
               <p>[[asset.creditStatement]]</p>
             </div>
+            <span class="flex"></span>
             <div id="heroIcons" class="horizontal layout">
               <div class="iconItem">
                 <paper-icon-button toggles="" on-click="toggle" icon="toha-icons:gavel"></paper-icon-button>
@@ -190,9 +222,9 @@
         <iron-collapse id="assetReuse" class="horizontal layout">
           <div class="content layout vertical boundingContainer">
             <h4 class="h4Light">Reuse this image</h4>
-            <p>Can I reuse this image without permission? <span>[[asset.imageReuse]]</span></p><p>
-            </p><p>[[asset.imageCopyright]]</p>
-            <paper-icon-button toggles="" icon="menu"></paper-icon-button>
+            <p>Can I reuse this image without permission? <span>[[asset.imageReuse]]</span></p>
+            <p>[[asset.imageCopyright]]</p>
+            <paper-button id="request-button"><iron-icon icon="toha-icons:request"></iron-icon><p>Request Use</p></paper-button>
             <template is="dom-repeat" items="[[asset.webpageUsageNotes]]">
               <p>[[item]]</p>
             </template>

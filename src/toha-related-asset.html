@@ -45,23 +45,31 @@
 
       }
 
+      .card-action {
+        @apply(--layout-horizontal);
+        @apply(--layout-around-justified);
+      }
+
       .card-action paper-button {
          --paper-button: {
            opacity: 0.9;
            @apply(--paper-font-caption);
            @apply(--toha-lightBody-type);
            color: var(--paper-grey-600);
-           padding: 0;
+           padding: 0.5em 0.25em 0.25em 0.25em;
          };
+         @apply(--layout-flex);
+         margin: 0;
       }
 
-      .card-action a:hover paper-button {
-         --paper-button: {
-           font-style: normal;
-           font-weight: var(--toha-bold-font);
-         }
+      .card-action > paper-button:hover{
+        font-style: normal;
+        font-weight: var(--toha-bold-font);
       }
 
+      .card-action > paper-button > a:hover {
+        text-decoration: none;
+      }
 
       ::content div {
         white-space: normal;
@@ -106,7 +114,6 @@
 
     </style>
 
-
     <paper-card id="relatedAsset" class="asset-related" image="[[urlBase]][[uuid]]/data/image/[[uuid]].web.small.jpg">
       <div class="card-content">
         <div id="photographType" class="asset-type">
@@ -119,13 +126,12 @@
         <content select="div[description]"></content>
       </div>
       <div class="card-action">
-        <a href="/ark:/1234/[[uuid]]">
-           <paper-button>VIEW</paper-button>
-        </a>
+        <paper-button><a href="/ark:/1234/[[uuid]]">VIEW</a></paper-button>
         <paper-button>SHARE</paper-button>
-    
+      </div>
+    </paper-card>
 
-  </div></paper-card></template>
+  </template>
 
   <script>Polymer({is:"toha-related-asset",properties:{uuid:String,urlBase:{type:String,value:function(){return new Polymer.IronMetaQuery({type:"url",key:"collection"}).value}},photograph:String,article:String},ready:function(){var t=this.$$("#articleType");(this.article||"Article"==this.type)&&(t=this.$$("#photographType")),this.toggleAttribute("hidden",!0,t),this.item||(this.item=this.photograph?this.photograph:this.article)}});</script>
 </dom-module>

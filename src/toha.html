@@ -10,6 +10,7 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <link rel="import" href="toha-shared-styles.html">
+<link rel="import" href="toha-footer.html">
 <link rel="import" href="toha-toolbar.html">
 <link rel="import" href="toha-toolbar-links.html">
 <link rel="import" href="toha-object.html">
@@ -44,8 +45,6 @@
       --toolbar-height: var(--toolbar-desktop-height);
       --toolbar-color: var(--toha-header-background-color);
       --toolbar-title-style: {
-          @apply(--toha-header-font);
-          font-size: 2rem;
           margin-top: 0.2rem;
       };
       --toolbar-subtitle-style: {
@@ -86,10 +85,6 @@
     @media (max-width: 720px) {
       toha-toolbar {
         --toolbar-height: var(--toolbar-mobile-height);
-        --toolbar-title-style: {
-          @apply(--toha-header-font);
-          font-size: 2rem;
-        }
         --toolbar-subtitle-style: {
           display: none;
         }
@@ -122,7 +117,7 @@
       </app-drawer>
       <app-header-layout>
         <app-header reveals="">
-          <toha-toolbar title="toha" subtitle="Photography Database of Tauranga">
+          <toha-toolbar>
             <template is="dom-if" if="{{!smallScreen}}">
               <toha-toolbar-links class="horizontal layout"></toha-toolbar-links>
               <paper-button id="search-button"><iron-icon icon="search"></iron-icon><p>Search</p></paper-button>
@@ -145,6 +140,8 @@
 
     
     
+
+    <toha-footer query="(max-width: 720px)"></toha-footer>
 
   </template>
   <script>Polymer({is:"toha-app",changeTheme:function(){this.updateStyles()},properties:{uuid:{type:String,reflectToAttribute:!0,observer:"_uuidChanged"}},observers:["_routeChanged(routeData.uuid)"],_routeChanged:function(e){this.uuid=e||new Polymer.IronMetaQuery({type:"uuid",key:"default"}).value},_uuidChanged:function(e){if(!this.$$("toha-object[uuid='"+this.uuid+"']")){var t=this.create("toha-object");t.setAttribute("uuid",this.uuid),Polymer.dom(this.$.collectionpages).appendChild(t)}}});</script>

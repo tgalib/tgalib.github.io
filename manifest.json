@@ -1,6 +1,6 @@
 {
-  "name": "toha",
-  "short_name": "toha",
+  "name": "Toha Photography Collection",
+  "short_name": "Toha",
     "icons": [{
       "src": "images/app-icon-32.png",
       "type": "image/png",
@@ -21,9 +21,13 @@
       "src": "images/app-icon.svg",
       "sizes": "384x384",
       "type": "image/svg"
+    },{
+      "src": "images/app-icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg"
     }],
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#3f51b5",
-  "theme_color": "#3f51b5"
+  "background_color": "#171D2F",
+  "theme_color": "#171D2F"
 }

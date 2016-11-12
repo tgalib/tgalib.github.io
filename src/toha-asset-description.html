@@ -25,6 +25,7 @@
         @apply(--layout-horizontal);
       }
       #assetDescription {
+        @apply(--layout-flex);
         @apply(--layout-vertical);
         margin-right: 1em;
       }
@@ -33,6 +34,21 @@
       }
       #assetMisc, span.value {
         @apply(--layout-flex);
+      }
+
+      #dlButton {
+        width: 100%;
+        text-transform: none;
+        font-family: inherit;
+        border: 1px solid var(--toha-header-background-color);
+        margin: 0.5em 0 0 0;
+      }
+      #dlButton p {
+        margin: 0.25em 0 0 0;
+      }
+
+      #dlIcon {
+        margin-right: 1em;
       }
 
       /* Portrait and Landscape */
@@ -60,7 +76,7 @@
       }
 
       #assetMisc {
-        min-width: 20em;
+        max-width: 20em;
       }
       .item {
         margin-right: 1.5em;
@@ -109,9 +125,12 @@
        </div>
 
        <h4>Cite this page</h4>
-       <div>[[asset.partOfCollection]]</div>
-       <div><a href="[[asset.permalink]]">[[asset.permalink]]</a></div>
+       <div>[[asset.partOfCollection]] [[asset.publisher]] [[asset.dateCreated]] <a href="[[asset.permalink]]">[[asset.permalink]]</a></div>
        <div>Accessed [[asset.accessed]]</div>
+       <a href="[[asset.bibTex]]" tabindex="-1">
+         <paper-button id="dlButton"><iron-icon id="dlIcon" icon="toha-icons:download"></iron-icon><p>Download Bibtex</p></paper-button>
+       </a>
+
        <h4>Rights</h4>
        <div>[[asset.textReuse]]</div>
 
@@ -135,6 +154,6 @@
     </div>
   </template>
 
-  <script>Polymer({is:"toha-asset-description",behaviors:[TohaAsset]});</script>
+  <script>function downloadBibtex(e){e.addEventListener("transitionend",function(e){location.href="metadata/reference.bib"})}Polymer({is:"toha-asset-description",behaviors:[TohaAsset]});</script>
 </dom-module>
 </body></html>

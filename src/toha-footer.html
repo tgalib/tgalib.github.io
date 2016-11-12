@@ -1,0 +1,174 @@
+<html><head><link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+
+<link rel="import" href="toha-shared-styles.html">
+
+</head><body><dom-module id="toha-footer" attributes="query">
+  <template>
+    <style>
+      p {
+        margin: 0;
+      }
+      .boundingContainer {
+        max-width: 77.5em;
+        margin: 0 auto;
+        padding: 0 2em;
+      }
+      .flex {
+        @apply(--layout-flex);
+      }
+      .linkContainer {
+        @apply(--layout-vertical);
+        width: 7.5em;
+        padding-right: 2em;
+        border-right: 1px solid var(--toha-darker-background-color);
+        margin: 2em 0 2em 2em;
+      }
+      .linkContainer h4 {
+        margin-top: 0;
+      }
+      #footerTop {
+        background: var(--toha-header-background-color);
+      }
+      #footerBottom {
+        background: var(--toha-darker-background-color);
+      }
+      #linksFooter {
+        @apply(--layout-horizontal);
+        @apply(--toha-darkBody-type);
+        margin-top: 2em;
+      }
+      #linksFooter a {
+        color: inherit;
+        text-decoration: none;
+      }
+      #linksFooter a:hover {
+        text-decoration: underline;
+      }
+      #logo {
+        @apply(--layout-self-center);
+        width: 8em;
+        height: 3em;
+        background: url('../images/toha-title.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+      }
+      #links {
+        @apply(--layout-horizontal);
+      }
+      #detailsFooter {
+        @apply(--toha-darkBody-type);
+        padding: 1em 2em;
+        opacity: 0.56;
+      }
+      #detailsFooter div {
+        margin-bottom: 1em;
+      }
+      #detailsFooter a {
+        color: inherit;
+      }
+      #libraryLinks {
+        @apply(--layout-horizontal);
+      }
+      #libraryLinks * {
+        margin-right: 1em;
+      }
+      #gitDetail {
+        @apply(--layout-horizontal);
+      }
+      #gitLogo {
+        width: 2.5em;
+        height: 2.5em;
+        background-image: url('../images/github-logo.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        margin-right: 1em;
+      }
+
+      /* Mobile Layout Styling*/
+      #linksFooter[mobile-layout] {
+        @apply(--layout-vertical);
+      }
+      #linksFooter[mobile-layout] .linkContainer {
+        display: none;
+        /* width: 100%;
+        margin: 0 0 1em 0;
+        padding: 0;
+        text-align: center;
+        border: none; */
+      }
+      #linksFooter[mobile-layout] #links{
+        @apply(--layout-vertical);
+      }
+      #detailsFooter[mobile-layout] {
+        @apply(--layout-vertical);
+        text-align: center;
+      }
+      #detailsFooter[mobile-layout] #libraryLinks {
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+      }
+      #detailsFooter[mobile-layout] #gitDetail {
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+      }
+    </style>
+
+    <iron-media-query query="{{query}}" query-matches="{{smallScreen}}">
+    </iron-media-query>
+
+    <div id="footerTop">
+      <div id="linksFooter" class="boundingContainer" mobile-layout$="{{smallScreen}}">
+        <div id="logo"></div>
+        <span class="flex"></span>
+        <div id="links">
+          <div id="collectionsLinks" class="linkContainer">
+            <h4>Collections</h4>
+            <a href="#">City Places</a>
+            <a href="#">Maunganui</a>
+            <a href="#">Marae</a>
+            <a href="#">Gate Pa</a>
+          </div>
+          <div id="aboutLinks" class="linkContainer">
+            <h4>About Toha</h4>
+            <a href="#">Documentation</a>
+            <a href="#">GitHub</a>
+            <a href="#">Wiki</a>
+            <a href="#">Contributing</a>
+          </div>
+          <div id="linksLinks" class="linkContainer">
+            <h4>Links</h4>
+            <a href="#">Tauranga City</a>
+            <a href="#">City Library</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footerBottom">
+      <div id="detailsFooter" class="boundingContainer" mobile-layout$="{{smallScreen}}">
+        <div id="libraryAddress">Tauranga City Library | 91 Willow Street, Tauranga, 3110, New Zealand</div>
+        <div id="libraryLinks">
+          <p>© Tauranga City Library</p>
+          <a href="#">Privacy</a>
+          <a href="#">Disclaimer</a>
+          <a href="#">Conditions</a>
+          <a href="#">Rights</a>
+          <a href="#">Contact Us</a>
+        </div>
+        <div id="gitDetail">
+          <div id="gitLogo"></div>
+          <div>
+            <p>The <a href="#">Bagit Archive</a> for this Digital Object is available on <a href="#">GitHub</a>.</p>
+            <p>Contributions and improvements to the metadata can be suggested by raising an issue or sending us a pull request</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </template>
+
+  <script>Polymer({is:"toha-footer"});</script>
+</dom-module>
+</body></html>

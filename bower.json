@@ -30,7 +30,8 @@
     "iron-media-query": "PolymerElements/iron-media-query#^1.0.8",
     "iron-pages": "PolymerElements/iron-pages#^1.0.8",
     "iron-ajax": "PolymerElements/iron-ajax#^1.4.3",
-    "iron-meta": "PolymerElements/iron-meta#^1.1.2"
+    "iron-meta": "PolymerElements/iron-meta#^1.1.2",
+    "app-storage": "PolymerElements/app-storage#^0.9.7"
   },
   "devDependencies": {}
 }
