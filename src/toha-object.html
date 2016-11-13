@@ -10,6 +10,7 @@
 
 <link rel="import" href="toha-asset-data.html">
 <link rel="import" href="toha-asset-description.html">
+<link rel="import" href="toha-footer.html">
 <link rel="import" href="toha-icons.html">
 <link rel="import" href="toha-related-asset.html">
 <link rel="import" href="toha-shared-styles.html">
@@ -274,6 +275,8 @@
             
           </toha-related-asset></template>
         </div>
+
+       <toha-footer jsonld="[[asset]]" query="(max-width: 720px)"></toha-footer>
 
   </template>
   <script>Polymer({is:"toha-object",behaviors:[TohaAsset],toggle:function(){this.$.assetReuse.toggle()},changeTheme:function(){this.updateStyles()},_handleErrorResponse:function(e){console.log("ERROR: Ajax Request Failed - FIXME")}});</script>

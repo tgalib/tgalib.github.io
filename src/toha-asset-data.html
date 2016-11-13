@@ -98,6 +98,8 @@
         ];
 
         /* Map the JSON-LD data model into the page Data-Model */
+        gitBaseUrl = 'https://github.com/tgalib/ao-' + entity['@id'].slice(URNPREFIX),
+
         config.asset = Object.freeze({
 
           uuid: entity['@id'].slice(URNPREFIX),
@@ -108,6 +110,10 @@
           urlBase: this.urlBase + entity['@id'].slice(URNPREFIX) + '/data/',
           imageUrl: media.large.contentUrl,
           bibTex: this.urlBase + entity['@id'].slice(URNPREFIX) + '/metadata/reference.bib',
+          gitUrl: gitBaseUrl,
+          bagitUrl: gitBaseUrl + '/tree/archiveobject',
+          issuesUrl: gitBaseUrl + '/issues',
+          wikiUrl: gitBaseUrl + '/wiki',
           creator: entity.creator.reduce((s,c) => s += `, ${c.jobTitle}: ${c.name}`, '').slice(2),
           physical: example.description,
           source: entity.sourceOrganization.reduce((s,o) => s += `, ${o.name}`, '').slice(2),

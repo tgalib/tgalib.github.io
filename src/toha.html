@@ -10,7 +10,7 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <link rel="import" href="toha-shared-styles.html">
-<link rel="import" href="toha-footer.html">
+
 <link rel="import" href="toha-toolbar.html">
 <link rel="import" href="toha-toolbar-links.html">
 <link rel="import" href="toha-object.html">
@@ -141,7 +141,7 @@
     
     
 
-    <toha-footer query="(max-width: 720px)"></toha-footer>
+
 
   </template>
   <script>Polymer({is:"toha-app",changeTheme:function(){this.updateStyles()},properties:{uuid:{type:String,reflectToAttribute:!0,observer:"_uuidChanged"}},observers:["_routeChanged(routeData.uuid)"],_routeChanged:function(e){this.uuid=e||new Polymer.IronMetaQuery({type:"uuid",key:"default"}).value},_uuidChanged:function(e){if(!this.$$("toha-object[uuid='"+this.uuid+"']")){var t=this.create("toha-object");t.setAttribute("uuid",this.uuid),Polymer.dom(this.$.collectionpages).appendChild(t)}}});</script>
