@@ -12,7 +12,7 @@
 <link rel="import" href="toha-asset-description.html">
 <link rel="import" href="toha-footer.html">
 <link rel="import" href="toha-icons.html">
-<link rel="import" href="toha-related-asset.html">
+<link rel="import" href="toha-related-assets.html">
 <link rel="import" href="toha-shared-styles.html">
 
 </head><body><dom-module id="toha-object">
@@ -107,18 +107,14 @@
       margin-top: 0;
       margin-bottom: 1rem;
     }
-    #assetsRelated {
-       margin-top: 50px;
-    }
+
     #assetHeader{
       border-bottom: 3px solid var(--toha-secondary-color);
     }
     #assetDetail {
       margin-top: 1em;
     }
-    toha-related-asset {
-      @apply(--layout-flex);
-    }
+
     #request-button {
       display: inline-block;
       font-family: inherit;
@@ -267,14 +263,8 @@
         
         <toha-asset-description jsonld="[[asset]]" class="boundingContainer"></toha-asset-description>
 
-        <div id="assetsRelated" class="layout horizontal wrap boundingContainer">
-          <template is="dom-repeat" items="[[asset.related]]">
-            <toha-related-asset type="[[item.type]]" uuid="[[item.uuid]]">
-              <div name="">[[item.name]]</div>
-              <div hidden$="[[!item.description]]" description="">[[item.description]]</div>
-            
-          </toha-related-asset></template>
-        </div>
+        <toha-related-assets class="boundingContainer" jsonld="[[asset]]">
+        </toha-related-assets>
 
        <toha-footer jsonld="[[asset]]" query="(max-width: 720px)"></toha-footer>
 

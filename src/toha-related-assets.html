@@ -3,17 +3,22 @@
 <link rel="import" href="../bower_components/paper-styles/typography.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+
+<link rel="import" href="toha-asset-data.html">
 <link rel="import" href="toha-shared-styles.html">
 <link rel="import" href="toha-icons.html">
 
 
-</head><body><dom-module id="toha-related-asset">
+</head><body><dom-module id="toha-related-assets">
     <style include="toha-shared-styles"></style>
     <style>
       :host {
         @apply(--layout-horizontal);
         @apply(--paper-font-subhead);
         @apply(--toha-related-asset);
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
       }
 
       paper-card {
@@ -23,7 +28,8 @@
       .asset-related {
         min-width: 12em;
         margin: 5px;
-        width: 100%;
+        width: 22%;
+        flex-grow: 1;
         --paper-card {
           white-space: normal;
           @apply(--layout-vertical);
@@ -40,7 +46,10 @@
           color: var(--paper-grey-600);
           padding: 0;
         };
+      }
 
+      .asset-related[mobile-layout] {
+        width: 100%;
       }
 
       .card-action {
@@ -69,12 +78,13 @@
         text-decoration: none;
       }
 
-      ::content div {
+      div[name] {
         white-space: normal;
         font-weight: var(--toha-bold-font);
       }
 
-      ::content div[description] {
+      div[description] {
+        white-space: normal;
         font-weight: var(--toha-normal-font);
       }
 
@@ -94,11 +104,11 @@
         --iron-icon-width: 16px;
       }
 
-      #photographType iron-icon {
+      .photographType iron-icon {
         --iron-icon-fill-color: rgb(31, 167, 214);
       }
 
-      #articleType iron-icon {
+      .articleType iron-icon {
         --iron-icon-fill-color: rgb(220, 19, 41);
       }
       .asset-type[hidden] {
@@ -112,25 +122,32 @@
 
     </style>
   <template>
-    <paper-card id="relatedAsset" class="asset-related" image="[[urlBase]][[uuid]]/data/image/[[uuid]].web.small.jpg">
+
+    <iron-media-query query="(max-width: 720px)" query-matches="{{smallScreen}}">
+    </iron-media-query>
+
+    <template is="dom-repeat" items="[[asset.related]]">
+
+    <paper-card class="asset-related" image="[[urlBase]][[item.uuid]]/data/image/[[item.uuid]].web.small.jpg" mobile-layout$="{{smallScreen}}">
       <div class="card-content">
-        <div id="photographType" class="asset-type">
+        <div class="photographType asset-type" hidden$="{{!isPhotograph(item.type)}}">
           <iron-icon icon="toha-icons:images"></iron-icon><span>Photograph</span>
         </div>
-        <div id="articleType" class="asset-type">
+        <div class="articleType asset-type" hidden$="{{!isArticle(item.type)}}">
           <iron-icon icon="subject"></iron-icon><span>Article</span>
         </div>
-        <content select="div[name]"></content>
-        <content select="div[description]"></content>
+        <div name="">[[item.name]]</div>
+        <div description="" hidden$="[[!item.description]]">[[item.description]]</div>
       </div>
       <div class="card-action">
-        <paper-button><a href="/ark:/1234/[[uuid]]">VIEW</a></paper-button>
+        <paper-button><a href="/ark:/1234/[[item.uuid]]">VIEW</a></paper-button>
         <paper-button>SHARE</paper-button>
       </div>
     </paper-card>
 
+    </template>
   </template>
 
-  <script>Polymer({is:"toha-related-asset",properties:{uuid:String,urlBase:{type:String,value:function(){return new Polymer.IronMetaQuery({type:"url",key:"collection"}).value}},photograph:String,article:String},ready:function(){var t=this.$$("#articleType");(this.article||"Article"==this.type)&&(t=this.$$("#photographType")),this.toggleAttribute("hidden",!0,t),this.item||(this.item=this.photograph?this.photograph:this.article)}});</script>
+  <script>Polymer({is:"toha-related-assets",behaviors:[TohaAsset],isArticle:function(t){return"Article"==t},isPhotograph:function(t){return"Photograph"==t}});</script>
 </dom-module>
 </body></html>
